@@ -1,0 +1,95 @@
+﻿@model Okoone_Assignment.User
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<html>
+<head>
+    <title>Register Form</title>
+    <script src="@Url.Content("~/Scripts/jquery-3.1.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+</head>
+<body style="background-color:#088fe8;font-family:'Segoe UI'">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        if (ViewBag.Message != null) {
+            @ViewBag.Message
+            }
+        <center>
+            <div style="border-radius:10px;border:3px solid white;width:600px;height:300px;color:white;">
+                <h2>Register</h2>
+                <table>
+                    <tr>
+                        <td style="color:white">
+                            @Html.LabelFor(model => model.Username)
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.Username)
+                            @Html.ValidationMessageFor(model => model.Username)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:white">
+                            @Html.LabelFor(model => model.Password)
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.Password)
+                            @Html.ValidationMessageFor(model => model.Password)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:white">
+                            @Html.LabelFor(model => model.ComfirmPassword)
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.ComfirmPassword)
+                            @Html.ValidationMessageFor(model => model.ComfirmPassword)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:white">
+                            @Html.LabelFor(model => model.FirstName)
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.FirstName)
+                            @Html.ValidationMessageFor(model => model.FirstName)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:white">
+                            @Html.LabelFor(model => model.LastName)
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.LastName)
+                            @Html.ValidationMessageFor(model => model.LastName)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:white">
+                            @Html.LabelFor(model => model.Email)
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.Email)
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input style=" color:white;padding: 3px; background-color: #088fe8; border:2px solid white; border-radius: 4px" type="submit" value="Sign Up" />
+                        </td>
+                        <td>
+                            @Html.ActionLink("Sign In", "Login")
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </center>
+    }
+</body>
+</html>

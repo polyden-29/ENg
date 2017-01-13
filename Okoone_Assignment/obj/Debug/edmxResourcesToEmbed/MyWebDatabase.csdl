@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MyWebDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Articles" Relationship="MyWebDBModel.UserArticle" FromRole="User" ToRole="Article" />
+    <NavigationProperty Name="Articles1" Relationship="MyWebDBModel.UserArticle1" FromRole="User" ToRole="Article" />
+  </EntityType>
+  <EntityContainer Name="MyWebDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="Articles" EntityType="MyWebDBModel.Article" />
+    <AssociationSet Name="UserArticle" Association="MyWebDBModel.UserArticle">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Article" EntitySet="Articles" />
+    </AssociationSet>
+    <AssociationSet Name="UserArticle1" Association="MyWebDBModel.UserArticle1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Article" EntitySet="Articles" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DatePublished" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="User" Relationship="MyWebDBModel.UserArticle" FromRole="Article" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="MyWebDBModel.UserArticle1" FromRole="Article" ToRole="User" />
+    <Property Name="UserUsername" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="UserArticle">
+    <End Type="MyWebDBModel.User" Role="User" Multiplicity="1" />
+    <End Type="MyWebDBModel.Article" Role="Article" Multiplicity="*" />
+  </Association>
+  <Association Name="UserArticle1">
+    <End Type="MyWebDBModel.User" Role="User" Multiplicity="1" />
+    <End Type="MyWebDBModel.Article" Role="Article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="Article">
+        <PropertyRef Name="UserUsername" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

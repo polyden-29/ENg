@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "LogedUser";
+}
+<html>
+    <head>
+        <title></title>
+    </head>
+<body style="background-color:#088fe8;font-family:'Segoe UI'">
+    <h2 style="color:white">You Are Login</h2>
+    @if (Session["name"] != null)
+{
+    <p style="color:white">
+        Welcome<span style ="color:red;font-variant:small-caps;font-weight:bold"> @Session["name"].ToString()</span>
+    </p>
+
+}
+    <p>@Html.ActionLink("Logout", "Login")</p>
+</body>
+
+</html>
